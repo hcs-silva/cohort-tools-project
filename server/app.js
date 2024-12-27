@@ -8,6 +8,8 @@ const PORT = 5005;
 // ...
 const cohorts = require("./cohorts.json");
 
+const students = require("./students.json")
+
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
 
@@ -29,6 +31,10 @@ app.get("/docs", (req, res) => {
 
 app.get("/api/cohorts", (req, res) => {
   res.status(200).json(cohorts);
+});
+
+app.get("/api/students", (req, res) => {
+  res.status(200).json(students);
 });
 
 // START SERVER
