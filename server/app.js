@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const PORT = 5005;
 
 // STATIC DATA
@@ -8,7 +9,7 @@ const PORT = 5005;
 // ...
 const cohorts = require("./cohorts.json");
 
-const students = require("./students.json")
+const students = require("./students.json");
 
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
@@ -16,6 +17,11 @@ const app = express();
 // MIDDLEWARE
 // Research Team - Set up CORS middleware here:
 // ...
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static("public"));
