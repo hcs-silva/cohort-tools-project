@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
 })
 
 router.get("/cohort/:cohortId", (req, res) => {
-    console.log(req.params.cohortId)
+    
     StudentModel.find({cohort: req.params.cohortId})
     .populate("cohort")
     .then((student) => {
@@ -37,5 +37,7 @@ router.get("/cohort/:cohortId", (req, res) => {
         res.status(500).json(err)
     })
 })
+
+
 
 module.exports = router;
