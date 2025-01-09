@@ -5,6 +5,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 const PORT = 5005;
 
+require("./db")
+
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
