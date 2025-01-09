@@ -12,17 +12,17 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:slug", async (req, res) => {
-    try{
-        const cohort = await Cohort.findOne({cohortSlug: req.params.slug });
+    try {
+        const cohort = await Cohort.findOne({ cohortSlug: req.params.slug });
 
         if (!cohort) {
             return res.status(404).json({ message: "Cohort not found" });
         }
 
-        req.json(cohort)
-    }   catch (err) {
-            console.log(err);
-            res.status(500).json({ message: "Error finding cohort" })
+        res.json(cohort);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error finding cohort" });
     }
 });
 
