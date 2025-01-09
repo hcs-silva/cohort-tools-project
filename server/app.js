@@ -46,15 +46,6 @@ app.use("/api/cohorts", cohortRoutes);
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
-
-app.get("/api/cohorts", (req, res) => {
-  res.status(200).json(cohorts);
-});
-
-app.get("/api/students", (req, res) => {
-  res.status(200).json(students);
-});
-
 // START SERVER
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
