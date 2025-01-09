@@ -7,6 +7,7 @@ const PORT = 5005;
 
 require("./db")
 const cohortRoutes = require("./Routes/cohort.routes");
+const studentRoutes = require("./Routes/student.routes")
 
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
@@ -39,7 +40,7 @@ app.use(helmet()); //security
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
 // Devs Team - Start working on the routes here:
 // ...
-
+app.use("/api/students", studentRoutes);
 app.use("/api/cohorts", cohortRoutes);
 
 app.get("/docs", (req, res) => {
