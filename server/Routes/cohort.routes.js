@@ -4,10 +4,16 @@ const Cohort = require("../Models/CohortModel")
 router.get("/", async (req, res) => {
     try{
         const cohortsFromDB = await Cohort.find()
-        res.json(cohortsFromDB)
+        res.status(200).json({
+            message: "Cohorts retrieved successfully",
+            data: cohortsFromDB
+        });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Error getting cohorts" });
+        res.status(500).json({ 
+            message: "Error getting cohorts",
+            error: err.message 
+        });
     }
 });
 
@@ -16,29 +22,41 @@ router.get("/:slug", async (req, res) => {
         const cohort = await Cohort.findOne({ cohortSlug: req.params.slug });
 
         if (!cohort) {
-            return res.status(404).json({ message: "Cohort not found" });
+            return res.status(404).json({
+                message: "Cohort not found"
+            });
         }
 
-        res.json(cohort);
+        res.status(200).json({
+            message: "Cohort retrieved successfully",
+            data: cohort
+        });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Error finding cohort" });
+        res.status(500).json({
+            message: "Error finding cohort",
+            error: err.message
+        });
     }
 });
 
 router.post("/", async (req, res) => {
     try{
         const newCohort = new Cohort(req.body);
-
         const savedCohort = await newCohort.save();
 
-        res.status(201).json(savedCohort);
-
+        res.status(201).json({
+            message: "Cohort created successfully",
+            data: savedCohort
+        });
     }   catch (err) {
             console.log(err)
-            res.status(400).json({ message: "Error creating cohort"})
+            res.status(400).json({
+                message: "Error creating cohort",
+                error: err.message
+            });
     }
-})
+});
 
 router.put("/:slug", async (req, res) => {
     try {
@@ -49,13 +67,21 @@ router.put("/:slug", async (req, res) => {
         );
 
         if (!updatedCohort) {
-            return res.status(404).json({ message: "Cohort not found" });
+            return res.status(404).json({
+                message: "Cohort not found"
+            });
         }
 
-        res.json(updatedCohort);
+        res.status(200).json({
+            message: "Cohort updated successfully",
+            data: updatedCohort
+        });
     } catch (err) {
         console.log(err);
-        res.status(400).json({ message: "Error updating cohort" });
+        res.status(400).json({
+            message: "Error updating cohort",
+            error: err.message
+        });
     }
 });
 
@@ -66,13 +92,20 @@ router.delete("/:slug", async (req, res) => {
         );
 
         if (!deletedCohort) {
-            return res.status(404).json({ message: "Cohort not found" });
+            return res.status(404).json({
+                message: "Cohort not found"
+            });
         }
 
-        res.json({ message: "Cohort successfully deleted" });
+        res.status(200).json({
+            message: "Cohort deleted successfully"
+        });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Error deleting cohort" });
+        res.status(500).json({
+            message: "Error deleting cohort",
+            error: err.message
+        });
     }
 });
 
