@@ -21,6 +21,37 @@ const app = express();
 // MIDDLEWARE
 // Research Team - Set up CORS middleware here:
 // ...
+app.use( //LEARNING DIFFERENT MIDDLEWARES
+  helmet({
+    // Configures Content Security Policy
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], // Only allow resources from same origin
+        scriptSrc: ["'self'", "'unsafe-inline'"], // Allow inline scripts and same origin
+        styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles and same origin
+        imgSrc: ["'self'", "data:", "https:"], // Allow images from same origin, data URLs, and HTTPS
+        connectSrc: ["'self'", "http://localhost:5173"], // Allow connections to self and your frontend
+      },
+    },
+    // Helps prevent clickjacking attacks
+    frameguard: {
+      action: "deny" // Prevents your page from being embedded in iframes
+    },
+    // Sets X-DNS-Prefetch-Control header
+    dnsPrefetchControl: {
+      allow: false // Disables DNS prefetching
+    },
+    // Removes X-Powered-By header
+    hidePoweredBy: true,
+    // Sets Strict-Transport-Security header
+    hsts: {
+      maxAge: 31536000, // 1 year in seconds
+      includeSubDomains: true,
+      preload: true
+    }
+  })
+);
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
