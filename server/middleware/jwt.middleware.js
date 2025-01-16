@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const isAuthenticated = (req, res, next) => {
   try {
+    console.log("You are in the middleware")
     if (
       req.headers.authorization &&
       req.headers.authorization.split(" ")[0] == "Bearer"

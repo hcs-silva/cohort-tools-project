@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 const PORT = 5005;
+require('dotenv').config();
 
 require("./db");
 const cohortRoutes = require("./Routes/cohort.routes");
@@ -75,7 +76,7 @@ app.use(helmet()); //security
 // ...
 app.use("/api/students", studentRoutes);
 app.use("/api/cohorts", cohortRoutes);
-app.use("api/users", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
 
 app.get("/docs", (req, res) => {
