@@ -4,13 +4,16 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 const PORT = 5005;
-require('dotenv').config();
+require("dotenv").config();
 
 require("./db");
 const cohortRoutes = require("./Routes/cohort.routes");
 const studentRoutes = require("./Routes/student.routes");
 const authRoutes = require("./Routes/auth.routes");
 const userRoutes = require("./Routes/user.routes");
+
+const swaggerUI = require("swagger-ui-express");
+const docs = require("./docs");
 
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
@@ -82,6 +85,9 @@ app.use("/auth", authRoutes);
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
+
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs));
 
 const {
   errorHandler,
