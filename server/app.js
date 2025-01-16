@@ -1,13 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
-const cors = require("cors"); 
+const cors = require("cors");
 const helmet = require("helmet");
 const PORT = 5005;
 
-require("./db")
+require("./db");
 const cohortRoutes = require("./Routes/cohort.routes");
-const studentRoutes = require("./Routes/student.routes")
+const studentRoutes = require("./Routes/student.routes");
+const authRoutes = require("./Routes/auth.routes");
+const userRoutes = require("./Routes/user.routes");
 
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
@@ -21,7 +23,8 @@ const app = express();
 // MIDDLEWARE
 // Research Team - Set up CORS middleware here:
 // ...
-app.use( //LEARNING DIFFERENT MIDDLEWARES
+app.use(
+  //LEARNING DIFFERENT MIDDLEWARES
   helmet({
     // Configures Content Security Policy
     contentSecurityPolicy: {
@@ -35,11 +38,11 @@ app.use( //LEARNING DIFFERENT MIDDLEWARES
     },
     // Helps prevent clickjacking attacks
     frameguard: {
-      action: "deny" // Prevents your page from being embedded in iframes
+      action: "deny", // Prevents your page from being embedded in iframes
     },
     // Sets X-DNS-Prefetch-Control header
     dnsPrefetchControl: {
-      allow: false // Disables DNS prefetching
+      allow: false, // Disables DNS prefetching
     },
     // Removes X-Powered-By header
     hidePoweredBy: true,
@@ -47,17 +50,17 @@ app.use( //LEARNING DIFFERENT MIDDLEWARES
     hsts: {
       maxAge: 31536000, // 1 year in seconds
       includeSubDomains: true,
-      preload: true
-    }
+      preload: true,
+    },
   })
 );
 
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-   credentials: true, //allows for cookies and auth
-   maxAge: 86400, //reduces server load by only caching for 24hours
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true, //allows for cookies and auth
+    maxAge: 86400, //reduces server load by only caching for 24hours
   })
 );
 app.use(express.json());
@@ -72,14 +75,19 @@ app.use(helmet()); //security
 // ...
 app.use("/api/students", studentRoutes);
 app.use("/api/cohorts", cohortRoutes);
+app.use("api/users", userRoutes);
+app.use("/auth", authRoutes);
 
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
-const {errorHandler, notFoundHandler} = require("./middleware/error-handling")
+const {
+  errorHandler,
+  notFoundHandler,
+} = require("./middleware/error-handling");
 
-app.use(errorHandler)
+app.use(errorHandler);
 app.use(notFoundHandler);
 
 // START SERVER
