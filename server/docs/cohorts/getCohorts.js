@@ -2,7 +2,7 @@ module.exports = {
     // method of operation
     get: {
       tags: ["Cohort CRUD"], // operation's tag.
-      description: "Get Cohorts", // operation's desc.
+      description: "Get all the cohorts", // operation's desc.
       operationId: "getCohorts", // unique operation id.
       parameters: [], // expected params.
       // expected responses

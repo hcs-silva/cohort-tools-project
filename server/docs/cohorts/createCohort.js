@@ -1,5 +1,6 @@
 module.exports = {
     // method of operation
+    //TODO: implement the correct type in the models
     post: {
       tags: ["Cohort CRUD"], // operation's tag.
       description: "Create one cohort", // operation's desc.
@@ -23,7 +24,7 @@ module.exports = {
             description: "Invalid request",
         },
 
-        200: {
+        201: {
           description: "Cohort was created", // response desc.
           content: {
             // content-type

@@ -30,6 +30,9 @@ module.exports = {
             },
           },
         },
+        404: {
+            description: "Cohort not found", // response desc.
+        },
       },
     },
   };
