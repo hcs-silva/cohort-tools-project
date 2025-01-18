@@ -22,7 +22,7 @@ module.exports = {
             type: "enum",
             description: "Name of the Campus",
           },
-          startDate: {            
+          startDate: {
             type: "date",
             pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/,
             example: "2019-05-17",
@@ -125,6 +125,8 @@ module.exports = {
           },
         },
       },
+
+     
       // error model
       Error: {
         type: "object", //data type
