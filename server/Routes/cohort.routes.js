@@ -17,9 +17,9 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:slug", async (req, res) => {
+router.get("/:cohortId", async (req, res) => {
     try {
-        const cohort = await Cohort.findOne({ cohortSlug: req.params.slug });
+        const cohort = await Cohort.findOne({ cohortId: req.params._id });
 
         if (!cohort) {
             return res.status(404).json({
@@ -58,10 +58,10 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:slug", async (req, res) => {
+router.put("/:cohortId", async (req, res) => {
     try {
         const updatedCohort = await Cohort.findOneAndUpdate(
-            { cohortSlug: req.params.slug },
+            { cohortId: req.params._id },
             req.body,
             { new: true }
         );
@@ -85,10 +85,10 @@ router.put("/:slug", async (req, res) => {
     }
 });
 
-router.delete("/:slug", async (req, res) => {
+router.delete("/:cohortId", async (req, res) => {
     try {
         const deletedCohort = await Cohort.findOneAndDelete(
-            { cohortSlug: req.params.slug }
+            { cohortId: req.params._id }
         );
 
         if (!deletedCohort) {

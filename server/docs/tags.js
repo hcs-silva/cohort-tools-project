@@ -5,7 +5,7 @@ module.exports = {
             description: 'CRUD operations for students'
         }, 
         {
-            name: 'Cohorts CRUD',
+            name: 'Cohort CRUD',
             description: 'CRUD operations for cohorts'
         },
         {

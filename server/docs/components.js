@@ -2,7 +2,7 @@ module.exports = {
   components: {
     schemas: {
       // cohort model
-      Cohort: {
+      CohortModel: {
         type: "object",
         properties: {
           cohortSlug: {
@@ -14,20 +14,24 @@ module.exports = {
             description: "Name of the Cohort",
           },
           program: {
-            type: "string",
+            type: "enum",
             description: "type of the program",
             example: "Web Dev, UI/UX",
           },
           campus: {
-            type: "string",
+            type: "enum",
             description: "Name of the Campus",
           },
-          startDate: {
-            type: "string",
+          startDate: {            
+            type: "date",
+            pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/,
+            example: "2019-05-17",
             description: "The current date",
           },
           endDate: {
-            type: "string",
+            type: "date",
+            pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/,
+            example: "2019-05-17",
             description: "The final date of the cohort",
           },
           inProgress: {
@@ -103,18 +107,21 @@ module.exports = {
         },
       },
       // Todo input model
-      TodoInput: {
-        type: "object", // data type
+      UserModel: {
+        type: "object",
         properties: {
-          title: {
-            type: "string", // data type
-            description: "Todo's title", // desc
-            example: "Coding in JavaScript", // example of a title
+          name: {
+            type: "string",
+            description: "The name of the user",
+            example: "Hernâni/Neha/Luke",
           },
-          completed: {
-            type: "boolean", // data type
-            description: "The status of the todo", // desc
-            example: false, // example of a completed value
+          email: {
+            type: "string",
+            description: "the user's email, that must be unique",
+            example: "user@gmail.com",
+          },
+          password: {
+            type: "string",
           },
         },
       },
